@@ -2,7 +2,9 @@ import { Body, Controller, Get, Post, Res, Next } from '@nestjs/common';
 import { NextFunction, Response } from 'express';
 import { UserDto } from 'src/dto/user.dto';
 import { UserService } from './user.service';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('User Authentification')
 @Controller('user')
 export class UserController {
 	constructor(private userService: UserService) { }
@@ -14,7 +16,8 @@ export class UserController {
 			res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true })
 			return res.json(userData);
 		} catch (e) {
-			next(e);
+			res.send(e.message)
+			next(e.message);
 		}
 	}
 
@@ -25,7 +28,8 @@ export class UserController {
 			res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true })
 			return res.json(userData);
 		} catch (e) {
-			next(e);
+			res.send(e.message)
+			next(e.message);
 		}
 	}
 

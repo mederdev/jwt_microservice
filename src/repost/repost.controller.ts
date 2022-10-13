@@ -2,7 +2,10 @@ import { Body, Controller, Get, Post, Req } from '@nestjs/common';
 import { CommentDto } from 'src/dto/comment.dto';
 import { PostDto } from 'src/dto/post.dto';
 import { RepostService } from './repost.service';
+import { ApiTags } from '@nestjs/swagger';
 
+
+@ApiTags('Post-Comment')
 @Controller('repost')
 export class RepostController {
 	constructor(private repostService: RepostService) { }
